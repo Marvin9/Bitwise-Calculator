@@ -2,6 +2,6 @@
 
 Fast, easy to calculate Bitwise operations. No need to click & wait to get an answer. 😎
 
-![Travis (.org)](https://img.shields.io/travis/Marvin9/Bitwise-Calculator?style=for-the-badge)
+[![Build Status](https://travis-ci.com/Marvin9/Bitwise-Calculator.svg?branch=master)](https://travis-ci.com/Marvin9/Bitwise-Calculator)
 
 ## [Live](https://bitwise-calculator.netlify.com/)
