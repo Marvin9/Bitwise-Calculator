@@ -1,25 +1,31 @@
-import React from 'react'
-import Common from './operations/commonDesign/Common.AND_OR_XOR'
-import TwosComp from './operations/TWOS_COMP'
+import React from 'react';
+import PropTypes from 'prop-types';
+import Common from './operations/commonDesign/CommonAndOrXor';
+import TwosComp from './operations/TwosComplement';
 
-let OPERATIONS = [<Common heading="AND" operationName="AND" />, 
-                  <Common heading="OR" operationName="OR" />, 
-                  <Common heading="XOR" operationName="XOR" />,
-                  <TwosComp />
-                ]
+const OPERATIONS = [
+  <Common heading="AND" operationName="AND" />,
+  <Common heading="OR" operationName="OR" />,
+  <Common heading="XOR" operationName="XOR" />,
+  <TwosComp />,
+];
 
-export default ({ listOfOperations }) => (
-    <div className="row">
-        { Object.keys(listOfOperations).map((operation, key) => (
+const Operation = ({ listOfOperations }) => (
+  <div className="row">
+    { Object.keys(listOfOperations).map((operation, key) => (
+      listOfOperations[operation].isChecked
+        ? (
+          <div className="m-4">
+            { OPERATIONS[key] }
+          </div>
+        )
+        : null
+    ))}
+  </div>
+);
 
-            listOfOperations[operation].isChecked 
-            ? (
-                <div className="m-4">
-                    { OPERATIONS[key] }
-                </div>
-            ) 
-            : (<></>)
+Operation.propTypes = {
+  listOfOperations: PropTypes.objectOf(PropTypes.object).isRequired,
+};
 
-        ))}
-    </div>
-)
+export default Operation;
