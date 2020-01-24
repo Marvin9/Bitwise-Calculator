@@ -33365,7 +33365,7 @@ function (_Component) {
 
       var selectedOperations = this.state.selectedOperations;
       return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
-        className: "row"
+        className: "row mt-4"
       }, Object.keys(selectedOperations).map(function (operation) {
         return _react.default.createElement("div", {
           key: "".concat(selectedOperations[operation].name),
@@ -33410,11 +33410,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _default = function _default() {
   return _react.default.createElement("div", {
     className: "container"
-  }, _react.default.createElement("h2", {
-    className: "heading m-3 mb-4"
-  }, _react.default.createElement("u", null, "Bitwise operation calculator"), _react.default.createElement("br", null), _react.default.createElement("span", {
-    className: "lead"
-  }, "Faster, No need to click & wait to get answer.")), _react.default.createElement(_Selector.default, null));
+  }, _react.default.createElement("h1", {
+    className: "heading m-3 mb-0"
+  }, _react.default.createElement("u", null, "Bitwise operation calculator")), _react.default.createElement("h6", {
+    className: "lead m-3"
+  }, "Faster, No need to click & wait to get answer."), _react.default.createElement(_Selector.default, null));
 };
 
 exports.default = _default;
@@ -33458,7 +33458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52058" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52759" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
