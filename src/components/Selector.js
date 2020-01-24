@@ -30,7 +30,7 @@ export default class Selector extends Component {
 
     return (
       <>
-        <div className="row">
+        <div className="row mt-4">
 
           { Object.keys(selectedOperations).map((operation) => (
             <div

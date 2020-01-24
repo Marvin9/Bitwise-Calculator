@@ -4,13 +4,12 @@ import Selector from './components/Selector';
 export default () => (
   <div className="container">
 
-    <h2 className="heading m-3 mb-4">
+    <h1 className="heading m-3 mb-0">
       <u>Bitwise operation calculator</u>
-      <br />
-      <span className="lead">
-        Faster, No need to click & wait to get answer.
-      </span>
-    </h2>
+    </h1>
+    <h6 className="lead m-3">
+      Faster, No need to click & wait to get answer.
+    </h6>
 
     <Selector />
 
