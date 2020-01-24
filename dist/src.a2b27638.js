@@ -32753,7 +32753,7 @@ if ("development" !== 'production') {
   // http://fb.me/prop-types-in-prod
   module.exports = require('./factoryWithThrowingShims')();
 }
-},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"src/components/utils/conversion.js":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"src/components/utils/utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32761,6 +32761,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.binaryToDecimal = binaryToDecimal;
 exports.decimalToBinary = decimalToBinary;
+exports.isValidDecimal = isValidDecimal;
+exports.isValidBinary = isValidBinary;
 
 function binaryToDecimal(binary) {
   if (typeof binary !== 'string') return 0;
@@ -32770,6 +32772,18 @@ function binaryToDecimal(binary) {
 function decimalToBinary(decimal) {
   if (typeof decimal === 'number') return decimal.toString(2);
   return 0 .toString(2);
+}
+
+function isValidDecimal(dec) {
+  var decimalRegex = /[0-9]/g;
+  if (dec.match(decimalRegex).length === dec.length) return true;
+  return false;
+}
+
+function isValidBinary(bin) {
+  var binRegex = /0|1/g;
+  if (bin.match(binRegex).length === bin.length) return true;
+  return false;
 }
 },{}],"src/components/operations/commonDesign/CommonAndOrXor.js":[function(require,module,exports) {
 "use strict";
@@ -32793,7 +32807,7 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-var _conversion = require("../../utils/conversion");
+var _utils = require("../../utils/utils");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -32832,25 +32846,29 @@ function (_Component) {
       var whichNumberOfInputItIs = getMeaningfulInformationAboutThatInput[0]; // d - is decimal & b - is binary
 
       var letInputIsBinaryOrDecimal = getMeaningfulInformationAboutThatInput[1];
-      var valueEntered = anywhereInsideAND.target.value === '' ? 0 : anywhereInsideAND.target.value;
+      var valueEntered = anywhereInsideAND.target.value === '' ? '0' : anywhereInsideAND.target.value;
 
       switch (whichNumberOfInputItIs) {
         case '1':
           switch (letInputIsBinaryOrDecimal) {
             case 'd':
+              if (!(0, _utils.isValidDecimal)(valueEntered)) break;
+
               _this.setState({
                 value1: {
                   decimal: +valueEntered,
-                  binary: (0, _conversion.decimalToBinary)(+valueEntered)
+                  binary: (0, _utils.decimalToBinary)(+valueEntered)
                 }
               }, _this.performTemplate);
 
               break;
 
             case 'b':
+              if (!(0, _utils.isValidBinary)(valueEntered)) break;
+
               _this.setState({
                 value1: {
-                  decimal: (0, _conversion.binaryToDecimal)(valueEntered),
+                  decimal: (0, _utils.binaryToDecimal)(valueEntered),
                   binary: valueEntered
                 }
               }, _this.performTemplate);
@@ -32866,19 +32884,23 @@ function (_Component) {
         case '2':
           switch (letInputIsBinaryOrDecimal) {
             case 'd':
+              if (!(0, _utils.isValidDecimal)(valueEntered)) break;
+
               _this.setState({
                 value2: {
                   decimal: +valueEntered,
-                  binary: (0, _conversion.decimalToBinary)(+valueEntered)
+                  binary: (0, _utils.decimalToBinary)(+valueEntered)
                 }
               }, _this.performTemplate);
 
               break;
 
             case 'b':
+              if (!(0, _utils.isValidBinary)(valueEntered)) break;
+
               _this.setState({
                 value2: {
-                  decimal: (0, _conversion.binaryToDecimal)(valueEntered),
+                  decimal: (0, _utils.binaryToDecimal)(valueEntered),
                   binary: valueEntered
                 }
               }, _this.performTemplate);
@@ -32941,7 +32963,7 @@ function (_Component) {
       _this.setState({
         answer: {
           decimal: answer,
-          binary: (0, _conversion.decimalToBinary)(answer)
+          binary: (0, _utils.decimalToBinary)(answer)
         }
       }, fn);
     };
@@ -33032,7 +33054,7 @@ Common.propTypes = {
   heading: _propTypes.default.string.isRequired,
   operationName: _propTypes.default.string.isRequired
 };
-},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../../utils/conversion":"src/components/utils/conversion.js"}],"node_modules/@babel/runtime/helpers/arrayWithHoles.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../../utils/utils":"src/components/utils/utils.js"}],"node_modules/@babel/runtime/helpers/arrayWithHoles.js":[function(require,module,exports) {
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
@@ -33088,7 +33110,7 @@ function _slicedToArray(arr, i) {
 }
 
 module.exports = _slicedToArray;
-},{"./arrayWithHoles":"node_modules/@babel/runtime/helpers/arrayWithHoles.js","./iterableToArrayLimit":"node_modules/@babel/runtime/helpers/iterableToArrayLimit.js","./nonIterableRest":"node_modules/@babel/runtime/helpers/nonIterableRest.js"}],"src/components/operations/TWOS_COMP.js":[function(require,module,exports) {
+},{"./arrayWithHoles":"node_modules/@babel/runtime/helpers/arrayWithHoles.js","./iterableToArrayLimit":"node_modules/@babel/runtime/helpers/iterableToArrayLimit.js","./nonIterableRest":"node_modules/@babel/runtime/helpers/nonIterableRest.js"}],"src/components/operations/TwosComplement.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33100,7 +33122,7 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _conversion = require("../utils/conversion");
+var _utils = require("../utils/utils");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33133,7 +33155,7 @@ function TWOS_COMP() {
       setValues = _useState2[1];
 
   var _useState3 = (0, _react.useState)({
-    binary: (0, _conversion.decimalToBinary)(zerosTwosComplement),
+    binary: (0, _utils.decimalToBinary)(zerosTwosComplement),
     decimal: zerosTwosComplement
   }),
       _useState4 = (0, _slicedToArray2.default)(_useState3, 2),
@@ -33141,27 +33163,27 @@ function TWOS_COMP() {
       setAnswer = _useState4[1];
 
   var onValueEntered = function onValueEntered(event) {
-    var value = event.target.value === '' ? 0 : event.target.value;
+    var value = event.target.value === '' ? '0' : event.target.value;
     var twosComplementOfValue;
 
     switch (event.target.name) {
       case 'valueDecimal':
-        {
-          setValues({
-            binary: (0, _conversion.decimalToBinary)(+value),
-            decimal: +value
-          });
-          twosComplementOfValue = twosComplement(+value);
-          setAnswer({
-            decimal: twosComplementOfValue,
-            binary: (0, _conversion.decimalToBinary)(twosComplementOfValue)
-          });
-          break;
-        }
+        if (!(0, _utils.isValidDecimal)(value)) break;
+        setValues({
+          binary: (0, _utils.decimalToBinary)(+value),
+          decimal: +value
+        });
+        twosComplementOfValue = twosComplement(+value);
+        setAnswer({
+          decimal: twosComplementOfValue,
+          binary: (0, _utils.decimalToBinary)(twosComplementOfValue)
+        });
+        break;
 
       case 'valueBinary':
         {
-          var decimalOfValue = (0, _conversion.binaryToDecimal)(value);
+          if (!(0, _utils.isValidBinary)(value)) break;
+          var decimalOfValue = (0, _utils.binaryToDecimal)(value);
           setValues({
             decimal: decimalOfValue,
             binary: value
@@ -33169,7 +33191,7 @@ function TWOS_COMP() {
           twosComplementOfValue = twosComplement(decimalOfValue);
           setAnswer({
             decimal: twosComplementOfValue,
-            binary: (0, _conversion.decimalToBinary)(twosComplementOfValue)
+            binary: (0, _utils.decimalToBinary)(twosComplementOfValue)
           });
           break;
         }
@@ -33219,7 +33241,7 @@ function TWOS_COMP() {
     readOnly: true
   }))))));
 }
-},{"@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","../utils/conversion":"src/components/utils/conversion.js"}],"src/components/BitwiseOperations.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","../utils/utils":"src/components/utils/utils.js"}],"src/components/BitwiseOperations.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33233,7 +33255,7 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _CommonAndOrXor = _interopRequireDefault(require("./operations/commonDesign/CommonAndOrXor"));
 
-var _TWOS_COMP = _interopRequireDefault(require("./operations/TWOS_COMP"));
+var _TwosComplement = _interopRequireDefault(require("./operations/TwosComplement"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -33246,7 +33268,7 @@ var OPERATIONS = [_react.default.createElement(_CommonAndOrXor.default, {
 }), _react.default.createElement(_CommonAndOrXor.default, {
   heading: "XOR",
   operationName: "XOR"
-}), _react.default.createElement(_TWOS_COMP.default, null)];
+}), _react.default.createElement(_TwosComplement.default, null)];
 
 var Operation = function Operation(_ref) {
   var listOfOperations = _ref.listOfOperations;
@@ -33264,7 +33286,7 @@ Operation.propTypes = {
 };
 var _default = Operation;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","./operations/commonDesign/CommonAndOrXor":"src/components/operations/commonDesign/CommonAndOrXor.js","./operations/TWOS_COMP":"src/components/operations/TWOS_COMP.js"}],"src/components/Selector.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","./operations/commonDesign/CommonAndOrXor":"src/components/operations/commonDesign/CommonAndOrXor.js","./operations/TwosComplement":"src/components/operations/TwosComplement.js"}],"src/components/Selector.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33436,7 +33458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50740" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52058" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
