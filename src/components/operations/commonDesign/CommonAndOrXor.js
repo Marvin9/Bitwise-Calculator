@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { binaryToDecimal, decimalToBinary } from '../../utils/conversion';
+import {
+  binaryToDecimal,
+  decimalToBinary,
+  isValidDecimal,
+  isValidBinary,
+} from '../../utils/utils';
 
 export default class Common extends Component {
   constructor(props) {
@@ -30,22 +35,23 @@ export default class Common extends Component {
       // d - is decimal & b - is binary
       const letInputIsBinaryOrDecimal = getMeaningfulInformationAboutThatInput[1];
 
-      const valueEntered = anywhereInsideAND.target.value === '' ? 0 : anywhereInsideAND.target.value;
+      const valueEntered = anywhereInsideAND.target.value === '' ? '0' : anywhereInsideAND.target.value;
 
       switch (whichNumberOfInputItIs) {
         case '1':
           switch (letInputIsBinaryOrDecimal) {
             case 'd':
+              if (!isValidDecimal(valueEntered)) break;
               this.setState({
                 value1: {
                   decimal: +valueEntered,
                   binary: decimalToBinary(+valueEntered),
                 },
               }, this.performTemplate);
-
               break;
 
             case 'b':
+              if (!isValidBinary(valueEntered)) break;
               this.setState({
                 value1: {
                   decimal: binaryToDecimal(valueEntered),
@@ -64,6 +70,7 @@ export default class Common extends Component {
         case '2':
           switch (letInputIsBinaryOrDecimal) {
             case 'd':
+              if (!isValidDecimal(valueEntered)) break;
               this.setState({
                 value2: {
                   decimal: +valueEntered,
@@ -74,6 +81,7 @@ export default class Common extends Component {
               break;
 
             case 'b':
+              if (!isValidBinary(valueEntered)) break;
               this.setState({
                 value2: {
                   decimal: binaryToDecimal(valueEntered),

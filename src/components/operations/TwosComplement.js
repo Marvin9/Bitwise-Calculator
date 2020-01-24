@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { binaryToDecimal, decimalToBinary } from '../utils/conversion';
+import {
+  binaryToDecimal,
+  decimalToBinary,
+  isValidDecimal,
+  isValidBinary,
+} from '../utils/utils';
 
 function twosComplement(num) {
   if (typeof num === 'string') return 0;
@@ -23,11 +28,13 @@ export default function TWOS_COMP() {
   });
 
   const onValueEntered = (event) => {
-    const value = (event.target.value === '') ? 0 : event.target.value;
+    const value = (event.target.value === '') ? '0' : event.target.value;
     let twosComplementOfValue;
 
     switch (event.target.name) {
       case 'valueDecimal':
+        if (!isValidDecimal(value)) break;
+
         setValues({
           binary: decimalToBinary(+value),
           decimal: +value,
@@ -43,6 +50,8 @@ export default function TWOS_COMP() {
         break;
 
       case 'valueBinary': {
+        if (!isValidBinary(value)) break;
+
         const decimalOfValue = binaryToDecimal(value);
 
         setValues({ decimal: decimalOfValue, binary: value });
