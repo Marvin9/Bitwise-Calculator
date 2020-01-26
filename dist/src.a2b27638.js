@@ -32785,7 +32785,37 @@ function isValidBinary(bin) {
   if (bin.match(binRegex).length === bin.length) return true;
   return false;
 }
-},{}],"src/components/operations/commonDesign/CommonAndOrXor.js":[function(require,module,exports) {
+},{}],"src/components/operations/Clear.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Clear = function Clear(_ref) {
+  var setState = _ref.setState;
+  return _react.default.createElement("button", {
+    type: "button",
+    className: "btn btn-danger",
+    onClick: function onClick() {
+      setState();
+    }
+  }, "Clear");
+};
+
+Clear.propTypes = {
+  setState: _propTypes.default.func.isRequired
+};
+var _default = Clear;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js"}],"src/components/operations/commonDesign/CommonAndOrXor.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32809,6 +32839,8 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _utils = require("../../utils/utils");
 
+var _Clear = _interopRequireDefault(require("../Clear"));
+
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -32825,7 +32857,7 @@ function (_Component) {
 
     (0, _classCallCheck2.default)(this, Common);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(Common).call(this, props));
-    _this.state = {
+    _this.initial = {
       value1: {
         binary: '0',
         decimal: 0
@@ -32838,7 +32870,8 @@ function (_Component) {
         binary: 0,
         decimal: 0
       }
-    }; // todo change names
+    };
+    _this.state = _this.initial; // todo change names
 
     _this.onValueEntered = function (anywhereInsideAND) {
       var getMeaningfulInformationAboutThatInput = anywhereInsideAND.target.attributes['data-id'].value;
@@ -32974,12 +33007,18 @@ function (_Component) {
   (0, _createClass2.default)(Common, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$state2 = this.state,
           value1 = _this$state2.value1,
           value2 = _this$state2.value2,
           answer = _this$state2.answer;
       var heading = this.props.heading;
-      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h3", null, heading, ' ', ":", ' '), _react.default.createElement("table", {
+      return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h3", null, heading, ' ', ' ', _react.default.createElement(_Clear.default, {
+        setState: function setState() {
+          _this2.setState(_this2.initial);
+        }
+      })), _react.default.createElement("table", {
         className: "table table-borderless"
       }, _react.default.createElement("thead", null, _react.default.createElement("tr", null, _react.default.createElement("th", {
         scope: "col"
@@ -33054,7 +33093,7 @@ Common.propTypes = {
   heading: _propTypes.default.string.isRequired,
   operationName: _propTypes.default.string.isRequired
 };
-},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../../utils/utils":"src/components/utils/utils.js"}],"node_modules/@babel/runtime/helpers/arrayWithHoles.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","prop-types":"node_modules/prop-types/index.js","../../utils/utils":"src/components/utils/utils.js","../Clear":"src/components/operations/Clear.js"}],"node_modules/@babel/runtime/helpers/arrayWithHoles.js":[function(require,module,exports) {
 function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
@@ -33123,6 +33162,8 @@ var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/sli
 var _react = _interopRequireWildcard(require("react"));
 
 var _utils = require("../utils/utils");
+
+var _Clear = _interopRequireDefault(require("./Clear"));
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -33201,7 +33242,22 @@ function TWOS_COMP() {
     }
   };
 
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h3", null, "2's Complement : "), _react.default.createElement("table", {
+  var reset = function reset() {
+    setValues({
+      binary: '0',
+      decimal: 0
+    });
+    setAnswer({
+      binary: (0, _utils.decimalToBinary)(zerosTwosComplement),
+      decimal: zerosTwosComplement
+    });
+  };
+
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("h3", null, "2's Complement", ' ', ' ', _react.default.createElement(_Clear.default, {
+    setState: function setState() {
+      reset();
+    }
+  })), _react.default.createElement("table", {
     className: "table table-borderless"
   }, _react.default.createElement("thead", null, _react.default.createElement("tr", null, _react.default.createElement("th", {
     scope: "col"
@@ -33241,7 +33297,7 @@ function TWOS_COMP() {
     readOnly: true
   }))))));
 }
-},{"@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","../utils/utils":"src/components/utils/utils.js"}],"src/components/BitwiseOperations.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/slicedToArray":"node_modules/@babel/runtime/helpers/slicedToArray.js","react":"node_modules/react/index.js","../utils/utils":"src/components/utils/utils.js","./Clear":"src/components/operations/Clear.js"}],"src/components/BitwiseOperations.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33276,7 +33332,8 @@ var Operation = function Operation(_ref) {
     className: "row"
   }, Object.keys(listOfOperations).map(function (operation, key) {
     return listOfOperations[operation].isChecked ? _react.default.createElement("div", {
-      className: "m-4"
+      className: "m-4",
+      key: "".concat(operation)
     }, OPERATIONS[key]) : null;
   }));
 };
@@ -33458,7 +33515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52759" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51695" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
