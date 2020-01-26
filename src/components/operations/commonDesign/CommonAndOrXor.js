@@ -6,11 +6,12 @@ import {
   isValidDecimal,
   isValidBinary,
 } from '../../utils/utils';
+import Clear from '../Clear';
 
 export default class Common extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.initial = {
       value1: {
         binary: '0',
         decimal: 0,
@@ -24,6 +25,7 @@ export default class Common extends Component {
         decimal: 0,
       },
     };
+    this.state = this.initial;
 
     // todo change names
     this.onValueEntered = (anywhereInsideAND) => {
@@ -151,8 +153,8 @@ export default class Common extends Component {
         <h3>
           {heading}
           {' '}
-          :
           {' '}
+          <Clear setState={() => { this.setState(this.initial); }} />
         </h3>
         <table className="table table-borderless">
           <thead>

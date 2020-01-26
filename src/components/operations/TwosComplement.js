@@ -5,6 +5,7 @@ import {
   isValidDecimal,
   isValidBinary,
 } from '../utils/utils';
+import Clear from './Clear';
 
 function twosComplement(num) {
   if (typeof num === 'string') return 0;
@@ -71,10 +72,28 @@ export default function TWOS_COMP() {
     }
   };
 
+  const reset = () => {
+    setValues({
+      binary: '0',
+      decimal: 0,
+    });
+    setAnswer({
+      binary: decimalToBinary(zerosTwosComplement),
+      decimal: zerosTwosComplement,
+    });
+  };
 
   return (
     <>
-      <h3>2&apos;s Complement : </h3>
+      <h3>
+        2&apos;s Complement
+        {' '}
+        {' '}
+        <Clear setState={() => {
+          reset();
+        }}
+        />
+      </h3>
       <table className="table table-borderless">
         <thead>
           <tr>
