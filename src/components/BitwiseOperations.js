@@ -15,7 +15,7 @@ const Operation = ({ listOfOperations }) => (
     { Object.keys(listOfOperations).map((operation, key) => (
       listOfOperations[operation].isChecked
         ? (
-          <div className="m-4">
+          <div className="m-4" key={`${operation}`}>
             { OPERATIONS[key] }
           </div>
         )
