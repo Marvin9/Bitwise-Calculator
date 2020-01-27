@@ -12,12 +12,12 @@ export function decimalToBinary(decimal) {
 
 export function isValidDecimal(dec) {
   const decimalRegex = /[0-9]/g;
-  if (dec.match(decimalRegex).length === dec.length) return true;
+  if (dec.match(decimalRegex) && dec.match(decimalRegex).length === dec.length) return true;
   return false;
 }
 
 export function isValidBinary(bin) {
   const binRegex = /0|1/g;
-  if (bin.match(binRegex).length === bin.length) return true;
+  if (bin.match(binRegex) && bin.match(binRegex).length === bin.length) return true;
   return false;
 }
