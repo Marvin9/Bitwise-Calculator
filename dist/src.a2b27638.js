@@ -32776,13 +32776,13 @@ function decimalToBinary(decimal) {
 
 function isValidDecimal(dec) {
   var decimalRegex = /[0-9]/g;
-  if (dec.match(decimalRegex).length === dec.length) return true;
+  if (dec.match(decimalRegex) && dec.match(decimalRegex).length === dec.length) return true;
   return false;
 }
 
 function isValidBinary(bin) {
   var binRegex = /0|1/g;
-  if (bin.match(binRegex).length === bin.length) return true;
+  if (bin.match(binRegex) && bin.match(binRegex).length === bin.length) return true;
   return false;
 }
 },{}],"src/components/operations/Clear.js":[function(require,module,exports) {
@@ -33515,7 +33515,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51695" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49762" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
